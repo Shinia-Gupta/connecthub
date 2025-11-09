@@ -12,6 +12,10 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { showToast } from "@/src/app/components/toasts";
+import { loginViaInput } from "@/src/lib/actions/auth";
 
 const LoginSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -22,18 +26,16 @@ const LoginSchema = Yup.object({
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
 
   const handleSubmit = async (values: { email: string; password: string }) => {
-    setLoading(true);
-    try {
-      // Simulate login API call
-      await new Promise((res) => setTimeout(res, 1500));
+    const result = await loginViaInput(values.email, values.password)
 
-      alert(`Logged in as ${values.email}`);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
+    if (result?.error) {
+      showToast("error", result.error);
+    } else {
+      showToast("success", "Logged in successfully!");
+      router.push("/dashboard");
     }
   };
 
@@ -94,6 +96,15 @@ export default function LoginPage() {
                   disabled={loading}
                 >
                   {loading ? <CircularProgress size={24} color="inherit" /> : "Login"}
+                </Button>
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  color="inherit"
+                  sx={{ mt: 2 }}
+                  onClick={() => signIn("github", { callbackUrl: "/user-info" })}
+                >
+                  Continue with GitHub
                 </Button>
               </Form>
             )}
