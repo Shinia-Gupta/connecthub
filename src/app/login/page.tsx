@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { showToast } from "@/src/app/components/toasts";
+import { showToast } from "@/src/app/components/UI/toasts";
 import { loginViaInput } from "@/src/lib/actions/auth";
 import Link from "next/link";
 
@@ -39,7 +39,7 @@ export default function LoginPage() {
       showToast("error", result.error);
     } else {
       showToast("success", "Logged in successfully!");
-      router.push("/user-info");
+      router.push("/dashboard");
     }
   };
 
@@ -118,7 +118,7 @@ export default function LoginPage() {
                   variant="outlined"
                   color="inherit"
                   sx={{ mt: 2, py: 1.2, fontWeight: 500 }}
-                  onClick={() => signIn("github", { callbackUrl: "/user-info" })}
+                  onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
                 >
                   Continue with GitHub
                 </Button>

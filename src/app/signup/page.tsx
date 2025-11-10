@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { Box, Button, TextField, Typography, Card, CardContent, Divider } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/src/lib/actions/auth";
-import { showToast } from "@/src/app/components/toasts";
+import { showToast } from "@/src/app/components/UI/toasts";
 import Link from "next/link";
 
 const SignUpSchema = Yup.object({

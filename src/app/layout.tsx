@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import Link from "next/link";
 import { auth } from "@/src/auth";
 import Image from "next/image";
-import SignoutBtn from "./components/sign-out-button";
+import SignoutBtn from "./components/UI/sign-out-button";
 import Navbar from "@/src/app/components/Navbar";
 import Footer from "@/src/app/components/Footer";
 
@@ -31,17 +31,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-    const session = await auth();
+  const session = await auth();
   const user = session?.user;
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-            <Navbar/> 
+        <Navbar />
         {children}
-              <Footer/>
-        <ToastContainer/>
+        <Footer />
+        <ToastContainer />
       </body>
     </html>
   );
