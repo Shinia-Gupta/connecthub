@@ -35,7 +35,7 @@ export default function LoginPage() {
       showToast("error", result.error);
     } else {
       showToast("success", "Logged in successfully!");
-      router.push("/dashboard");
+      router.push("/user-info");
     }
   };
 

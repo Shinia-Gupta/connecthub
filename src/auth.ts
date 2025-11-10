@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs'
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@/src/generated/prisma";
 
-const prisma=new PrismaClient();
+export const prisma=new PrismaClient();
 
 //export functions generated for us based on the NextAuth function
 export const { auth, handlers, signIn, signOut } = NextAuth({

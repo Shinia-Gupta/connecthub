@@ -13,7 +13,7 @@ export default async function UserInfo(){
               <h2> Next Auth v5 + Next 16</h2>
               <p>User signed in with name: {session?.user?.name}</p>
               <p>User signed in with email: {session?.user?.email}</p>
-                <Image src={session?.user?.image||"null"} width={48} height={48} alt={session?.user?.name || "Avatar"} />
+                <Image src={session?.user?.image||"/assets/user_default_avatar.png"} width={48} height={48} alt={session?.user?.name || "Avatar"} />
               <SignoutBtn />
           
         </div>
