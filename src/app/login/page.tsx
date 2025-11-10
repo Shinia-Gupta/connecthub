@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
   Box,
@@ -11,11 +11,13 @@ import {
   CircularProgress,
   Card,
   CardContent,
+  Divider,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { showToast } from "@/src/app/components/toasts";
 import { loginViaInput } from "@/src/lib/actions/auth";
+import Link from "next/link";
 
 const LoginSchema = Yup.object({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -26,10 +28,12 @@ const LoginSchema = Yup.object({
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSubmit = async (values: { email: string; password: string }) => {
-    const result = await loginViaInput(values.email, values.password)
+    setLoading(true);
+    const result = await loginViaInput(values.email, values.password);
+    setLoading(false);
 
     if (result?.error) {
       showToast("error", result.error);
@@ -49,10 +53,17 @@ export default function LoginPage() {
         backgroundColor: "#f5f5f5",
       }}
     >
-      <Card sx={{ width: 380, boxShadow: 3, borderRadius: 3 }}>
+      <Card
+        sx={{
+          width: 380,
+          boxShadow: 4,
+          borderRadius: 3,
+          p: 1,
+        }}
+      >
         <CardContent>
-          <Typography variant="h5" fontWeight={600} textAlign="center" mb={2}>
-            Login
+          <Typography variant="h5" fontWeight={600} textAlign="center" mb={3}>
+            Welcome Back 👋
           </Typography>
 
           <Formik
@@ -92,20 +103,45 @@ export default function LoginPage() {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  sx={{ mt: 2 }}
+                  sx={{ mt: 3, py: 1.2, fontWeight: 600 }}
                   disabled={loading}
                 >
-                  {loading ? <CircularProgress size={24} color="inherit" /> : "Login"}
+                  {loading ? (
+                    <CircularProgress size={24} color="inherit" />
+                  ) : (
+                    "Login"
+                  )}
                 </Button>
+
                 <Button
                   fullWidth
                   variant="outlined"
                   color="inherit"
-                  sx={{ mt: 2 }}
+                  sx={{ mt: 2, py: 1.2, fontWeight: 500 }}
                   onClick={() => signIn("github", { callbackUrl: "/user-info" })}
                 >
                   Continue with GitHub
                 </Button>
+
+                <Divider sx={{ my: 3 }} />
+
+                <Typography
+                  variant="body2"
+                  textAlign="center"
+                  sx={{ color: "text.secondary" }}
+                >
+                  New to ConnectHub?{" "}
+                  <Link
+                    href="/signup"
+                    style={{
+                      textDecoration: "none",
+                      color: "#1976d2",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Register here
+                  </Link>
+                </Typography>
               </Form>
             )}
           </Formik>

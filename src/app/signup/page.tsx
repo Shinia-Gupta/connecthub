@@ -2,10 +2,11 @@
 
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Box, Button, TextField, Typography, Card, CardContent } from "@mui/material";
+import { Box, Button, TextField, Typography, Card, CardContent, Divider } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { registerUser } from "@/src/lib/actions/auth";
 import { showToast } from "@/src/app/components/toasts";
+import Link from "next/link";
 
 const SignUpSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -81,6 +82,25 @@ export default function SignupPage() {
                 <Button type="submit" fullWidth variant="contained" sx={{ mt: 2 }}>
                   Sign Up
                 </Button>
+                <Divider sx={{ my: 3 }} />
+
+                <Typography
+                  variant="body2"
+                  textAlign="center"
+                  sx={{ color: "text.secondary" }}
+                >
+                  Already have an account?{" "}
+                  <Link
+                    href="/login"
+                    style={{
+                      textDecoration: "none",
+                      color: "#1976d2",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Login here
+                  </Link>
+                </Typography>
               </Form>
             )}
           </Formik>

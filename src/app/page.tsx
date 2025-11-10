@@ -1,29 +1,22 @@
-"use server"
-
-import { auth } from "@/src/auth";
-import SigninBtn from "@/src/app/components/sign-in-btn";
-import Image from "next/image";
-import SignoutBtn from "@/src/app/components/sign-out-button";
-import Link from "next/link";
-
+"use server";
 
 export default async function Home() {
-  const session = await auth();
-  console.log("session- ", session);
+
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      {!session ?
-        <>
-          <h2>You are not signed in-</h2>
-          <SigninBtn />
-        </>
-        :
-        <>
-          <Link href={"/user-info"}>User Info</Link>
-          <SignoutBtn/>
-        </>
-      }
+    <div className="min-h-screen flex flex-col bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-100">
+
+
+      {/* Hero Section */}
+      <main className="flex flex-1 flex-col items-center justify-center text-center px-6">
+        <h1 className="text-5xl font-extrabold mb-4">Welcome to ConnectHub</h1>
+        <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-xl">
+          The platform where professionals connect, collaborate, and grow together.
+        </p>
+
+      </main>
+
+
     </div>
   );
 }
