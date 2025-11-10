@@ -2,6 +2,7 @@ import { auth } from "@/src/auth";
 import Image from "next/image";
 import Link from "next/link";
 import SignoutBtn from "./sign-out-button";
+import { Home } from "lucide-react"; 
 
 export default async function Navbar(){
 
@@ -20,6 +21,10 @@ export default async function Navbar(){
         <div className="flex items-center gap-4">
           {!user ? (
             <>
+            <Link href="/" className="flex items-center gap-1 hover:opacity-80">
+              <Home className="w-5 h-5" /> 
+              <span>Home</span>
+            </Link>
             <Link href={"/login"}>Sign In</Link>
             <Link href={"/signup"}>Sign Up</Link>
             </>
