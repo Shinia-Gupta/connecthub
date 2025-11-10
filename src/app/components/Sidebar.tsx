@@ -1,6 +1,6 @@
 "use client";
 import { Box, IconButton, Tooltip } from "@mui/material";
-import { Home, MessageSquare, ChevronLeft, ChevronRight } from "lucide-react";
+import { MessageSquare, ChevronLeft, ChevronRight, Blocks } from "lucide-react";
 import { useUIStore } from "@/src/store/uiStore";
 import Link from "next/link";
 
@@ -27,16 +27,18 @@ export default function Sidebar() {
       <Tooltip title="Dashboard" placement="right">
         <Link href="/dashboard">
           <IconButton sx={{ color: "#fff" }}>
-            <Home />
+            <Blocks /> 
           </IconButton>
+            {sidebarOpen && <span>Dashboard</span>}
         </Link>
       </Tooltip>
 
       <Tooltip title="Chat" placement="right">
         <Link href="/chat">
           <IconButton sx={{ color: "#fff" }}>
-            <MessageSquare />
+            <MessageSquare /> 
           </IconButton>
+            {sidebarOpen && <span>Chat</span>}
         </Link>
       </Tooltip>
     </Box>
