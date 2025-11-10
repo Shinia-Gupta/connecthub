@@ -8,6 +8,7 @@ import Image from "next/image";
 import SignoutBtn from "./components/UI/sign-out-button";
 import Navbar from "@/src/app/components/Navbar";
 import Footer from "@/src/app/components/Footer";
+import ThemeInitializer from "./components/ThemeInitializer";
 
 
 const geistSans = Geist({
@@ -38,9 +39,11 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <ThemeInitializer/>
         <Navbar />
         {children}
         <Footer />
+        
         <ToastContainer />
       </body>
     </html>
