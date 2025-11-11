@@ -13,7 +13,7 @@ export default function UsersAnalyticsTab() {
   if (!data) return <p>Loading...</p>;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 m-8">
       <div>
         <h3 className="text-xl font-bold mb-2">New Users</h3>
         <NewUsersChart
@@ -32,7 +32,7 @@ export default function UsersAnalyticsTab() {
       <div>
         <h3 className="text-xl font-bold mb-2">Top Active Users</h3>
         <TopUsersTable users={data.topActiveUsers} />
-      </div>
+              </div>
     </div>
   );
 }

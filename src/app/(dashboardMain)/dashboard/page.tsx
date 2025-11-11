@@ -6,13 +6,3 @@ export default async function UserInfo() {
 
   return <ClientUserInfo session={session} />;
 }
-
-// const UserInfo=()=>{
-//   return (
-//     <>
-//     hello
-//     </>
-//   )
-// } 
-
-// export default UserInfo;

@@ -18,7 +18,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       }}
     >
       <Sidebar />
-      <Box sx={{ flexGrow: 1, transition: "margin 0.3s", ml: sidebarOpen ? 25 : 8 }}>
+      <Box sx={{ flexGrow: 1,  ml: 8}}>
         {/* <Box sx={{ p: 3 }}> */}
             {children}
         {/* </Box> */}

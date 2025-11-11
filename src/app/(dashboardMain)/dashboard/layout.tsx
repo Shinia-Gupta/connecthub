@@ -2,8 +2,8 @@ export default function DashboardLayout({ children, chatAnalytics, userAnalytics
 
     return (
         <>
-            {chatAnalytics}
             {userAnalytics}
+            {chatAnalytics}
         </>
     )
 

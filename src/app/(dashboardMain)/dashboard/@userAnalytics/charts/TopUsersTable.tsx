@@ -1,13 +1,20 @@
+import { useThemeStore } from "@/src/store/themeStore";
 type TopUser = {
   name: string | null;
   email: string | null;
   activityCount: number;
 };
 
-export default function TopUsersTable({ users }:{users:TopUser[]}) {
+export default function TopUsersTable({ users }: { users: TopUser[] }) {
+  const { theme } = useThemeStore();
+  const isDark = theme === "dark";
   return (
-    <table className="min-w-full border border-gray-200">
-      <thead className="bg-gray-100">
+    <table
+      className={`min-w-full border ${
+        isDark ? "border-gray-700 bg-gray-900" : "border-gray-200 bg-white"
+      }`}
+    >
+      <thead className={isDark ? "bg-gray-800" : "bg-gray-100"}>
         <tr>
           <th className="px-4 py-2">Name</th>
           <th className="px-4 py-2">Email</th>
@@ -16,7 +23,12 @@ export default function TopUsersTable({ users }:{users:TopUser[]}) {
       </thead>
       <tbody>
         {users.map((user) => (
-          <tr key={user.email} className="border-t">
+          <tr
+            key={user.email}
+            className={`border-t ${
+              isDark ? "border-gray-700 hover:bg-gray-800" : "border-gray-200 hover:bg-gray-50"
+            }`}
+          >
             <td className="px-4 py-2">{user.name}</td>
             <td className="px-4 py-2">{user.email}</td>
             <td className="px-4 py-2">{user.activityCount}</td>
