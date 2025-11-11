@@ -13,7 +13,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     <Box
       sx={{
         display: "flex",
-        height: "100vh",
         bgcolor: theme === "dark" ? "#121212" : "#fafafa",
         color: theme === "dark" ? "#fff" : "#000",
       }}
