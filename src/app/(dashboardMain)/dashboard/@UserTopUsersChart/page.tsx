@@ -1,3 +1,5 @@
+"use client"
+import { useUserAnalytics } from "@/src/hooks/useUserAnalytics";
 import { useThemeStore } from "@/src/store/themeStore";
 type TopUser = {
   name: string | null;
@@ -5,9 +7,10 @@ type TopUser = {
   activityCount: number;
 };
 
-export default function TopUsersTable({ users }: { users: TopUser[] }) {
+export default function TopUsersTable() {
   const { theme } = useThemeStore();
   const isDark = theme === "dark";
+  const {data}=useUserAnalytics();
   return (
     <table
       className={`min-w-full border ${
@@ -22,7 +25,7 @@ export default function TopUsersTable({ users }: { users: TopUser[] }) {
         </tr>
       </thead>
       <tbody>
-        {users.map((user) => (
+        {data?.topActiveUsers.map((user:TopUser) => (
           <tr
             key={user.email}
             className={`border-t ${

@@ -1,15 +1,19 @@
+"use client"
+import { useUserAnalytics } from '@/src/hooks/useUserAnalytics';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 
-export default function NewUsersChart({ daily, weekly, monthly }:{daily:any,weekly:any,monthly:any}) {
-  const data = [
-    { period: 'Daily', users: daily },
-    { period: 'Weekly', users: weekly },
-    { period: 'Monthly', users: monthly },
+export default function NewUsersChart() {
+  const {data}=useUserAnalytics();
+  
+  const dataPlot = [
+    { period: 'Daily', users: data?.dailyNewUsers },
+    { period: 'Weekly', users: data?.weeklyNewUsers },
+    { period: 'Monthly', users: data?.monthlyNewUsers },
   ];
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={data}>
+      <BarChart data={dataPlot}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="period" />
         <YAxis />

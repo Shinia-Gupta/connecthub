@@ -9,6 +9,7 @@ import SignoutBtn from "./components/UI/sign-out-button";
 import Navbar from "@/src/app/components/Navbar";
 import Footer from "@/src/app/components/Footer";
 import ThemeInitializer from "./components/ThemeInitializer";
+import ReactQueryProvider from "@/src/providers/ReactQueryProvider";
 
 
 const geistSans = Geist({
@@ -41,7 +42,9 @@ export default async function RootLayout({
       >
         <ThemeInitializer/>
         <Navbar />
+        <ReactQueryProvider>
         {children}
+        </ReactQueryProvider>
         <Footer />
         
         <ToastContainer />
