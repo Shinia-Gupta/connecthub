@@ -3,7 +3,7 @@ export default function Loading() {
     <div className="flex flex-col items-center justify-center min-h-screen gap-3">
       <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-blue-500" />
       <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">
-        Loading Daily and Monthly Active Users...
+        Loading Chat Media Share...
       </p>
     </div>
   );
