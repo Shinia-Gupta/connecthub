@@ -40,7 +40,21 @@ const password=credentials.password as string
     pages:{
       signIn:"/login"
     },
-
+  events: {
+    async signIn({ user }) {
+      try {
+        if (!user?.id) return; 
+        await prisma.userActivity.create({
+          data: {
+            userId: user.id as string,
+            action: "login",
+          },
+        });
+      } catch (err) {
+        console.error("Error logging user login:", err);
+      }
+    },
+  },
       session: { strategy: "jwt" },
   secret: process.env.AUTH_SECRET,
 })

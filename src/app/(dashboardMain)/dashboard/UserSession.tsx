@@ -3,7 +3,7 @@
 import { useThemeStore } from "@/src/store/themeStore";
 import { Session } from "next-auth";
 import Image from "next/image";
-import SignoutBtn from "../../components/UI/sign-out-button";
+import SignoutBtn from "@/src/app/components/UI/sign-out-button";
 
 export default function UserSession({ session }: { session: Session | null }) {
   const { theme } = useThemeStore();
