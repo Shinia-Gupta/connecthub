@@ -5,27 +5,27 @@ import bcrypt from 'bcryptjs'
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@/src/generated/prisma";
 
-export const prisma=new PrismaClient();
+export const prisma = new PrismaClient();
 
 //export functions generated for us based on the NextAuth function
 export const { auth, handlers, signIn, signOut } = NextAuth({
-    adapter: PrismaAdapter(prisma),
-    providers: [
-        GitHub,
-        Credentials({
-            name: "Credentials",
-            credentials: {
-                email: { label: "Email", type: "email" },
-                password: { label: "Password", type: "password" },
-            },
-            async authorize(credentials) {
+  adapter: PrismaAdapter(prisma),
+  providers: [
+    GitHub,
+    Credentials({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
         if (!credentials?.email || !credentials?.password)
           throw new Error("Email and password required");
 
-        const email=credentials.email as string
-const password=credentials.password as string
+        const email = credentials.email as string
+        const password = credentials.password as string
         const user = await prisma.user.findUnique({
-          where:  {email},
+          where: { email },
         });
         if (!user || !user.password)
           throw new Error("User not found or missing password");
@@ -35,15 +35,23 @@ const password=credentials.password as string
 
         return user;
       },
-        }),
-    ],
-    pages:{
-      signIn:"/login"
+    }),
+  ],
+  pages: {
+    signIn: "/login"
+  },
+  callbacks: {
+    async session({ session, token }) {
+      if (session?.user && token?.sub) {
+        (session.user as any).id = token.sub;
+      }
+      return session;
     },
+  },
   events: {
     async signIn({ user }) {
       try {
-        if (!user?.id) return; 
+        if (!user?.id) return;
         await prisma.userActivity.create({
           data: {
             userId: user.id as string,
@@ -55,6 +63,6 @@ const password=credentials.password as string
       }
     },
   },
-      session: { strategy: "jwt" },
+  session: { strategy: "jwt" },
   secret: process.env.AUTH_SECRET,
 })
