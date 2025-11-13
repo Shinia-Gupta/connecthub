@@ -36,7 +36,7 @@ export default async function Navbar() {
             <>
               <Link href="/dashboard" className="flex items-center gap-2 hover:opacity-80">
                 <Image
-                  src={user.image || "/user-default-avatar.png"}
+                  src={user.image || "/assets/user_default_avatar.png"}
                   alt="User Avatar"
                   width={36}
                   height={36}
