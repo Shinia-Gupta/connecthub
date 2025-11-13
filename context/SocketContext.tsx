@@ -5,8 +5,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client"
 
 interface ISocketContext {
-    socket: Socket | null;
-    isConnected: boolean;
+    onlineUsers?: SocketUser[] | null;
+    user?:User|null;
 }
 
 export const SocketContext = createContext<ISocketContext | null>(null);
@@ -74,7 +74,7 @@ export const SocketContextProvider = ({ children, user }: { children: React.Reac
         };
     }, [socket, isSocketConnected, user]);
 
-    return <SocketContext.Provider value={{ socket, isConnected: isSocketConnected }}>
+    return <SocketContext.Provider value={{ onlineUsers, user }}>
         {children}
     </SocketContext.Provider>
 }
